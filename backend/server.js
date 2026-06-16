@@ -30,7 +30,7 @@ app.use(express.static(path.join(__dirname, "/frontend/dist")));
 
 
 app.get('/',(req,res)=>{
-	res.send('irfancsrrsimt@gmail.com/chat-app is running is...');
+	res.send('irfancsrrsimt@gmail.com/chat-app is running is hai...');
 	console.log('hello world..');
 })
 
