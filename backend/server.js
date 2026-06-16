@@ -20,7 +20,7 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json()); // to parse the incoming requests with JSON payloads (from req.body)
 app.use(cookieParser());
 // app.use(cors({ origin: process.env.FRONTEND_URL, methods: ["GET", "POST", "PUT", "DELETE"], credentials: true }));
-app.use(cors({ origin: ["http://localhost:5173","http://localhost:5174","http://localhost:3000","http://16.171.225.205:3000"], methods: ["GET", "POST", "PUT", "DELETE"], credentials: true }));
+app.use(cors({ origin: ["http://localhost:5173","http://localhost:5174","http://localhost:3000","http://16.171.225.205:3000","http://16.171.225.205:5173"], methods: ["GET", "POST", "PUT", "DELETE"], credentials: true }));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
