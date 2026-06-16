@@ -5,8 +5,8 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: Chat-app-server
-    image: irfanking0111/Chat-app-server:latest
+    container_name: chat-app-server
+    image: irfanking0111/chat-app-server:latest
     ports:
       - "5000:5000"
     networks:
@@ -17,8 +17,8 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    container_name: Chat-app-client
-    image: irfanking0111/Chat-app-client:latest
+    container_name: chat-app-client
+    image: irfanking0111/chat-app-client:latest
     ports:
       - "5173:3000"
     restart: unless-stopped
