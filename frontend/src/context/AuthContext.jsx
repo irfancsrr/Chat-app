@@ -3,7 +3,9 @@ import { createContext, useContext, useState } from "react";
 export const AuthContext = createContext();
 
 // const url="https://chat-app-backend-62ue.onrender.com";
-const url="http://localhost:5000";
+// const url="http://localhost:5000";
+const url="http://16.171.225.205:5000";
+
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const useAuthContext = () => {
