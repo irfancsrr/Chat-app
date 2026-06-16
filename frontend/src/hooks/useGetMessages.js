@@ -1,16 +1,21 @@
 import { useEffect, useState } from "react";
 import useConversation from "../zustand/useConversation";
 import toast from "react-hot-toast";
+import { useAuthContext } from "../context/AuthContext";
 
 const useGetMessages = () => {
 	const [loading, setLoading] = useState(false);
 	const { messages, setMessages, selectedConversation } = useConversation();
+	const {url}=useAuthContext();
 
 	useEffect(() => {
 		const getMessages = async () => {
 			setLoading(true);
 			try {
-				const res = await fetch(`/api/messages/${selectedConversation._id}`);
+				const res = await fetch(`${url}/api/messages/${selectedConversation._id}`,{
+					method:"GET",
+					credentials:"include",
+				});
 				const data = await res.json();
 				if (data.error) throw new Error(data.error);
 				setMessages(data);
@@ -22,7 +27,7 @@ const useGetMessages = () => {
 		};
 
 		if (selectedConversation?._id) getMessages();
-	}, [selectedConversation?._id, setMessages]);
+	}, [selectedConversation?._id]);
 
 	return { messages, loading };
 };

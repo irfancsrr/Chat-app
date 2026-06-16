@@ -1,0 +1,33 @@
+version: "3.2"
+
+services:
+  server:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: Chat-app-server
+    image: irfanking0111/Chat-app-server:latest
+    ports:
+      - "5000:5000"
+    networks:
+      - fullstack-net
+    restart: unless-stopped
+
+  client:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: Chat-app-client
+    image: irfanking0111/Chat-app-client:latest
+    ports:
+      - "5173:3000"
+    restart: unless-stopped
+    depends_on:
+      - server
+    networks:
+      - fullstack-net
+      
+
+networks:
+  fullstack-net:
+    driver: bridge

@@ -9,6 +9,7 @@ import userRoutes from "./routes/user.routes.js";
 
 import connectToMongoDB from "./db/connectToMongoDB.js";
 import { app, server } from "./socket/socket.js";
+import cors from "cors";
 
 dotenv.config();
 
@@ -18,6 +19,8 @@ const PORT = process.env.PORT || 5000;
 
 app.use(express.json()); // to parse the incoming requests with JSON payloads (from req.body)
 app.use(cookieParser());
+// app.use(cors({ origin: process.env.FRONTEND_URL, methods: ["GET", "POST", "PUT", "DELETE"], credentials: true }));
+app.use(cors({ origin: ["http://localhost:5173","http://localhost:5174","http://localhost:3000"], methods: ["GET", "POST", "PUT", "DELETE"], credentials: true }));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
@@ -25,9 +28,19 @@ app.use("/api/users", userRoutes);
 
 app.use(express.static(path.join(__dirname, "/frontend/dist")));
 
-app.get("*", (req, res) => {
-	res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
-});
+
+app.get('/',(req,res)=>{
+	res.send('irfancsrrsimt@gmail.com/chat-app is running ...');
+	console.log('hello world..');
+})
+
+app.get('/hello',(req,res)=>{
+	res.send('hii how are u ...');
+	console.log('hello world..');
+})
+
+// connectToMongoDB();//for vercel
+// export default app;// for vercel
 
 server.listen(PORT, () => {
 	connectToMongoDB();

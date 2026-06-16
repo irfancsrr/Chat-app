@@ -1,0 +1,26 @@
+name: chat-application CI/CD actions
+
+on:
+  push:
+    branches:
+      - main
+
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+      
+      - name: deploy via ssh
+        uses: appleboy/ssh_action@v1.0.3
+        with: 
+          host: ${{secrets.HOST}}
+          username: ubuntu
+          key: ${{secrets.SSH_KEY}}
+          script: |
+            cd /home/ubuntu/Chat-app-docker
+            sudo docker compose pull
+            sudo docker compose up -d --build

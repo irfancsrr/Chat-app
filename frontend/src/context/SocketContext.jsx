@@ -11,14 +11,17 @@ export const useSocketContext = () => {
 export const SocketContextProvider = ({ children }) => {
 	const [socket, setSocket] = useState(null);
 	const [onlineUsers, setOnlineUsers] = useState([]);
-	const { authUser } = useAuthContext();
-
+	const { authUser,url } = useAuthContext();
+    
 	useEffect(() => {
 		if (authUser) {
-			const socket = io("https://chat-app-yt.onrender.com", {
+			// const socket = io("https://chat-app-backend-62ue.onrender.com", {
+			const socket = io("http://localhost:5000", {
+
 				query: {
 					userId: authUser._id,
 				},
+			
 			});
 
 			setSocket(socket);
